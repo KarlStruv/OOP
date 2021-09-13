@@ -7,6 +7,7 @@
 //rating, which is a string representing the rating of the movie (i.e. PG­13, R, etc)
 //Write a constructor for the class Movie, which takes the title of the movie, studio, and rating as its arguments,
 // and sets the respective class variables to these values.
+
 //Write a method GetPG, which takes an array of base type Movie as its argument, and returns a new array of only
 // those movies in the input array with a rating of "PG". You may assume the input array is full of Movie instances.
 // The returned array may be empty.
@@ -23,44 +24,93 @@ class Movie{
     private string $title;
     private string $studio;
     private string $rating;
-    public array $newArray;
 
-    public function __construct(string $title, string $studio, string $rating, array $newArray){
+    public function __construct(string $title, string $studio, string $rating){
         $this->title = $title;
         $this->studio = $studio;
         $this->rating = $rating;
-        $this->newArray = $newArray;
-    }
-
-    public function getTitle(string $title) : string
-    {
-        return $this->title = $title;
-    }
-    public function getStudio(string $studio) : string
-    {
-        return $this->studio = $studio;
-    }
-    public function getRating(string $rating) : string
-    {
-        return $this->rating = $rating;
-    }
 
 
-    public function GetPG(array $movies) : array
+    }
+
+    public function getTitle() : string
     {
-        foreach ($movies as $movie){
-            if ($movie->rating === "PG"){
-                $newArray[] = $movie;
-            }
-        }
-        return $newArray;
+        return $this->title;
+    }
+    public function getStudio() : string
+    {
+        return $this->studio;
+    }
+    public function getRating() : string
+    {
+        return $this->rating;
     }
 
 }
 
-$movies = [
+
+class GetRating{
+    private array $movies;
+
+
+    public function __construct(array $movies)
+    {
+        foreach ($movies as $movie){
+            $this->addMovie($movie);
+        }
+    }
+
+    public function addMovie(Movie $movie)
+    {
+        $this->movies[] = $movie;
+    }
+
+
+    public function getPG()
+    {
+        foreach ($this->movies as $movie){
+            if ($movie->getRating() === "PG") {
+                $moviesWithRatingPG[] = $movie;
+
+            }
+
+        }
+        echo "Movies with the rating PG: " . PHP_EOL;
+        foreach ($moviesWithRatingPG as $key => $movie){
+            echo $key + 1 . ". {$movie->getTitle()} " . PHP_EOL;
+        }
+    }
+
+}
+
+
+$movies = new GetRating([
     new Movie("Casino Royale", "Eon Productions", "PG13"),
     new Movie("Glass", "Buena Vista International", "PG13"),
-    new Movie("Spider-Man: Into the Spider-Verse", "Columbia Pictures", "PG")
-];
+    new Movie("Spider-Man: Into the Spider-Verse", "Columbia Pictures", "PG"),
+    new Movie("Some movie with rating PG", "Kolumbijas bildes", "PG"),
+    new Movie("Some other movie(PG)", "Maskačka productions", "PG"),
+    new Movie("Some other movie without rating PG", "Maskačka productions", "PG13"),
+]);
+
+$movies->getPG();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

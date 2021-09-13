@@ -56,45 +56,37 @@ class Date{
     {
         return "{$this->month}/{$this->day}/{$this->year}" . PHP_EOL;
     }
+
+    public function Test()
+    {
+        if ($this->month < 1 || $this->month > 12){
+            return "{$this->month}/{$this->day}/{$this->year} - Invalid date" . PHP_EOL;
+        }
+        else if ($this->day < 1 || $this->day > 31){
+            return "{$this->month}/{$this->day}/{$this->year} - Invalid date" . PHP_EOL;
+        }
+        else if ($this->year < 1 || $this->year > 3000){
+            return "{$this->month}/{$this->day}/{$this->year} - Invalid date" . PHP_EOL;
+        } else {
+            return "{$this->month}/{$this->day}/{$this->year} - Date is correct." . PHP_EOL;
+        }
+    }
 }
 
 
 $dateArray = [
     new Date(01, 23,1993),
-    new Date(07, 41,1998)
+    new Date(07, 41,1998),
+    new Date(06, 2,19),
+    new Date(0, 23,2020),
+    new Date(3, 24,2025),
 ];
 
-foreach ($dateArray as $dates){
-    echo $dates->DisplayDate();
-}
+
 echo "==============================" . PHP_EOL;
 
-class DateTest{
-    private Date $month;
-    private Date $day;
-    private Date $year;
-
-    public function __construct(Date $month, Date $day, Date $year){
-        $this->month = $month;
-        $this->day = $day;
-        $this->year = $year;
-    }
-
-    public function Test($month, $day, $year) : string
-    {
-        if ($this->month < 1 || $this->month > 12){
-            return "Invalid date";
-        }
-        else if ($this->day < 1 || $this->day > 31){
-            return "Invalid date";
-        }
-        else if ($this->year < 1 || $this->year > 3000){
-            return "Invalid date";
-        }
-        return "Something";
-    }
-}
 
 foreach ($dateArray as $dates){
-    echo Test();
+    echo $dates->Test();
 }
+
